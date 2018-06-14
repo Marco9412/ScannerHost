@@ -1,0 +1,38 @@
+<!doctype html>
+<title>Scanner</title>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('connect', function() {
+        socket.emit('my event', {data: 'I\'m connected!'});
+    });
+
+    socket.on('scanOk', function (url) {
+        document.getElementById("bScan").disabled = false;
+        
+        //document.body.innerHTML += "<image href=\"" + url + "\" />";
+        var img = document.createElement("img");
+        img.src = url;
+        var src = document.getElementById("body");
+        src.appendChild(img);
+        
+        alert("scanok received! " + url);
+    });
+
+    socket.on('scanErr', function () {
+        document.getElementById("bScan").disabled = false;
+        alert('Error while scanning! Please retry!');
+    });
+</script>
+<h1>Welcome to scanner</h1>
+
+<button id="bScan" onclick="scan()">Scan</button> <br>
+
+<script type="text/javascript" charset="utf-8">
+    function scan() {
+        document.getElementById("bScan").disabled = true;
+        socket.emit('scanPlease');
+        //alert("scanPlease emitted!");
+    }
+</script>
+<a href="/pdf">Get pdf</a>
