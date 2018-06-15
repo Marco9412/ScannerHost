@@ -4,7 +4,13 @@ import os.path
 import subprocess
 
 
+def check_folder():
+    if not os.path.isdir('./sessions'):
+        os.mkdir('./sessions')
+
+
 def scan(session_id):
+    check_folder()
     directory = './sessions/%s' % session_id
 
     if not os.path.isdir(directory):
@@ -22,7 +28,7 @@ def pdf(session_id):
         return None, False
 
     res = ''
-    num = len(os.listdir(directory))
+    num = len(os.listdir(directory))  # TODO pdf makes counter + 1 with error when recreating it!
     for n in range(0, num):
         res = res + '%s/%d.png ' % (directory, n)
 
