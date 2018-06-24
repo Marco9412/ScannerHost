@@ -67,6 +67,11 @@ def hello_world():
 @app.route('/sessions/<path:path>')
 def send_image(path):
     return send_from_directory('sessions', path)
+
+
+@app.route('/documents/<path:path>')
+def send_image(path):
+    return send_from_directory('documents', path)
 # ----------------------------------------------------------------------------------------------------------------------
 
 
@@ -90,4 +95,5 @@ def do_scan():
 
 
 if __name__ == '__main__':
+    utils.check_folder()  # create session and documents folders
     socket_io.run(app, host='0.0.0.0')
