@@ -24,7 +24,7 @@ def scan(session_id):
     num = len(os.listdir(directory))
     if SCANNER_DEVICE:
         proc = subprocess.run(
-            ['/bin/bash', '-c', 'scanimage --resolution 300 -d \'%s\' --format=png > %s/%d.png'
+            ['/bin/bash', '-c', 'scanimage --resolution 300 -d %s --format=png > %s/%d.png'
              % (SCANNER_DEVICE, directory, num)])
         return ('%s/%d.png' % (directory, num)), proc.returncode == 0
     else:
