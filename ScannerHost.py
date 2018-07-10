@@ -52,8 +52,8 @@ def get_pdf():
     current_uid = get_current_uuid()
     if current_uid:
         path, res = utils.pdf(str(current_uid))
-        if res:
-            return redirect(path)
+        #if res:
+        return redirect(path)
     return "Error"
 
 
@@ -70,7 +70,7 @@ def send_image(path):
 
 
 @app.route('/documents/<path:path>')
-def send_image(path):
+def send_documents(path):
     return send_from_directory('documents', path)
 # ----------------------------------------------------------------------------------------------------------------------
 
