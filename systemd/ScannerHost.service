@@ -1,0 +1,14 @@
+[Unit]
+Description=ScannerHost instance
+After=network.target
+
+[Service]
+User=marco
+Group=marco
+WorkingDirectory=/home/marco/SoftwarePool/ScannerHost
+Environment="PATH=/usr/bin"
+ExecStart="/usr/bin/python3 ScannerHost.py &> scannerHost.log"
+
+[Install]
+WantedBy=multi-user.target
+

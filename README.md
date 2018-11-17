@@ -4,6 +4,7 @@ Simple web app that permit the user to take pictures from a saned scanner and au
 ## Requirements (pip)
 - flask
 - flask-socketio
+- gevent
 
 ## Requirements (system)
 - A scanner available from saned over the network (see https://wiki.debian.org/SaneOverNetwork)

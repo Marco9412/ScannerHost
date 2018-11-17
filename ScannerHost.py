@@ -14,7 +14,7 @@ import utils
 
 
 app = Flask(__name__, static_url_path='')
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'  # TODO change me!
+app.secret_key = 'A0Zr98j/3YX R~XHH!jmN]LWX/,?RT'  # TODO change me!
 socket_io = SocketIO(app)
 
 
@@ -94,6 +94,7 @@ def do_scan():
 # ----------------------------------------------------------------------------------------------------------------------
 
 
+utils.check_folder()  # create session and documents folders
+
 if __name__ == '__main__':
-    utils.check_folder()  # create session and documents folders
     socket_io.run(app, host='0.0.0.0')

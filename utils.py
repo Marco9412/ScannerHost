@@ -5,7 +5,7 @@ import subprocess
 
 # Or can be the name of the scanner to use to speedup scanning
 # The name can be extracted by executing 'scanimage -L'
-SCANNER_DEVICE = 'epson2:libusb:001:003'
+SCANNER_DEVICE = None  #'epson2:libusb:001:003'
 
 
 def check_folder():
