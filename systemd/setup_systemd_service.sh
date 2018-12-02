@@ -13,7 +13,7 @@ User=$(whoami)
 Group=$(whoami)
 WorkingDirectory=$(pwd)
 Environment=\"PATH=/usr/bin\"
-ExecStart=\"/usr/bin/python3 ScannerHost.py &> scannerHost.log\"
+ExecStart=\"$(pwd)/ScannerHost.py\"
 
 [Install]
 WantedBy=multi-user.target
