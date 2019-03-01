@@ -13,6 +13,7 @@ from flask import Flask, session, render_template, redirect, send_from_directory
 from flask_socketio import SocketIO, emit
 import uuid
 import utils
+import os
 
 
 app = Flask(__name__, static_url_path='')
@@ -99,4 +100,5 @@ def do_scan():
 utils.check_folder()  # create session and documents folders
 
 if __name__ == '__main__':
-    socket_io.run(app, host='0.0.0.0')
+    port = os.environ['SCANNER_HOST_PORT'] if 'SCANNER_HOST_PORT' in os.environ else '9996'
+    socket_io.run(app, host='0.0.0.0', port=int(port))
