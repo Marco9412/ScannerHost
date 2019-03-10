@@ -7,8 +7,6 @@ import subprocess
 # The name can be extracted by executing 'scanimage -L'
 SCANNER_DEVICE = None  #'epson2:libusb:001:003'
 
-# os.environ['SCANNER_HOST_PORT']
-
 BASEPATH = os.environ['SCANNER_HOST_BASEPATH'] if 'SCANNER_HOST_BASEPATH' in os.environ else '.'
 SESSIONS_FOLDER = BASEPATH + '/sessions'
 DOCUMENTS_FOLDER = BASEPATH + '/documents'

@@ -69,12 +69,12 @@ def hello_world():
 
 @app.route('/sessions/<path:path>')
 def send_image(path):
-    return send_from_directory('sessions', path)
+    return send_from_directory(utils.SESSIONS_FOLDER, path)
 
 
 @app.route('/documents/<path:path>')
 def send_documents(path):
-    return send_from_directory('documents', path)
+    return send_from_directory(utils.DOCUMENTS_FOLDER, path)
 # ----------------------------------------------------------------------------------------------------------------------
 
 
