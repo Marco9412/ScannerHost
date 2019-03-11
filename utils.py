@@ -8,8 +8,11 @@ import subprocess
 SCANNER_DEVICE = None  #'epson2:libusb:001:003'
 
 BASEPATH = os.environ['SCANNER_HOST_BASEPATH'] if 'SCANNER_HOST_BASEPATH' in os.environ else '.'
-SESSIONS_FOLDER = BASEPATH + '/sessions'
-DOCUMENTS_FOLDER = BASEPATH + '/documents'
+SESSIONS_SUFFIX = '/sessions'
+DOCUMENTS_SUFFIX = '/documents'
+
+SESSIONS_FOLDER = BASEPATH + SESSIONS_SUFFIX
+DOCUMENTS_FOLDER = BASEPATH + DOCUMENTS_SUFFIX
 
 
 def check_folder():
@@ -21,6 +24,7 @@ def check_folder():
 
 def scan(session_id):
     directory = '%s/%s' % (SESSIONS_FOLDER, session_id)
+    returnurl = '%s/%s' % (SESSIONS_SUFFIX, session_id)
 
     if not os.path.isdir(directory):
         os.mkdir(directory)
@@ -30,16 +34,17 @@ def scan(session_id):
         proc = subprocess.run(
             ['/bin/sh', '-c', 'scanimage --resolution 300 -d %s --format=png > %s/%d.png'
              % (SCANNER_DEVICE, directory, num)])
-        return ('%s/%d.png' % (directory, num)), proc.returncode == 0
+        return ('%s/%d.png' % (returnurl, num)), proc.returncode == 0
     else:
         proc = subprocess.run(['/bin/bash', '-c', 'scanimage --resolution 300 --format=png > %s/%d.png'
                                % (directory, num)])
-        return ('%s/%d.png' % (directory, num)), proc.returncode == 0
+        return ('%s/%d.png' % (returnurl, num)), proc.returncode == 0
 
 
 def pdf(session_id):
     directory = '%s/%s' % (SESSIONS_FOLDER, session_id)
     output = '%s/%s' % (DOCUMENTS_FOLDER, session_id)
+    returnurl = '%s/%s' % (DOCUMENTS_SUFFIX, session_id)
 
     if not os.path.isdir(directory):
         return None, False
@@ -52,5 +57,5 @@ def pdf(session_id):
         res = res + '%s/%d.png ' % (directory, n)
 
     proc = subprocess.run(['/bin/sh', '-c', 'convert %s %s/document.pdf' % (res, output)])
-    return ('%s/document.pdf' % output), proc.returncode == 0
+    return ('%s/document.pdf' % returnurl), proc.returncode == 0
 
